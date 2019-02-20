@@ -11,10 +11,7 @@ public:
 		, _weight(weight){}
 
 	
-	typedef HaffManTreeNode<W> HFNode;
-	bool operator>(const HFNode*& temp){
-		return _weight > temp->_weight;
-	}
+	
 
 	HaffManTreeNode<W>* _pLeft;
 	HaffManTreeNode<W>* _pRight;
@@ -24,13 +21,15 @@ public:
 
 template<class W>
 struct Less{
-	bool operator()(const W& pLeft, const W& pRight){
-		return pLeft > pRight;
+	typedef HaffManTreeNode<W>* pHFNode;
+	bool operator()(const pHFNode& pLeft, const pHFNode& pRight){
+		return pLeft->_weight > pRight->_weight;
 	}
 };
 
 template<class W>
 class HaffManTree{
+public:
 	typedef HaffManTreeNode<W> HFNode;
 	typedef HFNode* pHFNode;
 public:
@@ -44,15 +43,34 @@ public:
 
 	//建立haffman树
 
-	void CreadHaffmanTree(const vector<Char_info>& char_info, W invalid){
-		//if (Char_info.empty()){
-		//	//统计的字符信息为空
-		//	return;
-		//}
+	void CreadHaffmanTree(const vector<W>& char_info){
+		if (char_info.empty()){
+			return;
+			//统计的字符的信息为空
+		}
+		priority_queue<pHFNode, vector<pHFNode>, Less<W>> q;/////////////////////
 		
-		priority_queue<pHFNode, vector<pHFNode>, Less<pHFNode>> q;
-		
+		//将char_info中的元素建立小堆----优先级队列建立小堆
 
+		for (size_t i = 0; i < char_info.size(); ++i){
+			q.push(new HFNode(char_info[i]));
+		}
+
+		while (q.size()>1){
+			pHFNode pLeft = q.top();
+			q.pop();
+			pHFNode pRight = q.top();
+			q.pop();
+			//取较小的两个子树，做为一个新节点的左右子树
+			pHFNode pParent = new HFNode(pLeft->_weight + pRight->_weight);
+
+			pParent->_pLeft = pLeft;
+			pParent->_pRight = pRight;
+
+			//将新的结点插入小堆中
+			q.push(pParent);
+		}
+		_pRoot = q.top();
 	}
 
 private:

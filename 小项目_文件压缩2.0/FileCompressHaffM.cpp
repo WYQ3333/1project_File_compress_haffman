@@ -24,7 +24,6 @@ void FileCrompress::CompressFile(const string& strFilePath){
 	}
 
 	HaffManTree<Char_info> ht;
-	Char_info invalid;
-	ht.CreadHaffmanTree(char_info, invalid);
+	ht.CreadHaffmanTree(char_info);
 
 }
