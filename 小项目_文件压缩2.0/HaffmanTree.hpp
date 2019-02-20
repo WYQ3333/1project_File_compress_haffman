@@ -43,7 +43,7 @@ public:
 
 	//建立haffman树
 
-	void CreadHaffmanTree(const vector<W>& char_info){
+	void CreadHaffmanTree(const vector<W>& char_info,const W& invalid){
 		if (char_info.empty()){
 			return;
 			//统计的字符的信息为空
@@ -53,7 +53,10 @@ public:
 		//将char_info中的元素建立小堆----优先级队列建立小堆
 
 		for (size_t i = 0; i < char_info.size(); ++i){
-			q.push(new HFNode(char_info[i]));
+			if (char_info[i] != invalid){
+				q.push(new HFNode(char_info[i]));
+			}
+			
 		}
 
 		while (q.size()>1){

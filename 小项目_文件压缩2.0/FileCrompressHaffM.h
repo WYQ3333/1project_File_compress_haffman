@@ -17,19 +17,20 @@ struct Char_info{
 		return Char_info(temp._char_count + _char_count);
 	}
 
-	bool operator>(const Char_info& temp){
-		return temp._char_count>_char_count;
-	}
-	
-	bool operator<(const Char_info& temp){
+	bool operator>(const Char_info& temp)const{
 		return temp._char_count<_char_count;
 	}
 	
-	bool operator!=(const Char_info& temp){
+	bool operator<(const Char_info& temp)const{
+		return temp._char_count>_char_count;
+	}
+	//比较时，temp为const的,invalid也为const的
+	
+	bool operator!=(const Char_info& temp)const{
 		return temp._char_count!=_char_count;
 	}
 
-	bool operator==(const Char_info& temp){
+	bool operator==(const Char_info& temp)const{
 		return temp._char_count == _char_count;
 	}
 
