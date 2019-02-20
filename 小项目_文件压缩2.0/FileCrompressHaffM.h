@@ -1,8 +1,9 @@
 #pragma once
-
+#include"HaffmanTree.hpp"
 #include<iostream>
 #include<string>
 #include<vector>
+#include<assert.h>
 using namespace std;
 
 struct Char_info{
@@ -38,7 +39,12 @@ struct Char_info{
 
 class FileCrompress{
 public:
+	FileCrompress();
 	void CompressFile(const string& strFilePath);
 
 	void UNCompressFile(const string& strFilePath);
+
+private:
+	void GetHaffmanCode(HaffManTreeNode<Char_info>* pRoot);
+	vector<Char_info> _char_info;
 };

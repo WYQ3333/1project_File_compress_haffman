@@ -1,5 +1,4 @@
 #include"FileCrompressHaffM.h"
-#include"HaffmanTree.hpp"
 
 void TestFunc(){
 	FileCrompress f;
@@ -7,14 +6,14 @@ void TestFunc(){
 }
 
 
-//void TestFuncHaffMan(){
-//	vector<int> array{1, 3, 5, 7};
-//	HaffManTree<int> ht;
-//	ht.CreadHaffmanTree(array);
-//}
+void TestFuncHaffMan(){
+	vector<int> array{1, 3, 5, 7};
+	HaffManTree<int> ht;
+	ht.CreateHaffmanTree(array,array[0]);
+}
 
 int main(){
-	TestFunc();
+	TestFuncHaffMan();
 	system("pause");
 	return 0;
 }

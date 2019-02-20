@@ -1,4 +1,4 @@
-#include"FileCrompressHaffM.h"
+#pragma once
 #include<queue>
 
 template<class W>
@@ -10,8 +10,6 @@ public:
 		, _pParent(nullptr)
 		, _weight(weight){}
 
-	
-	
 
 	HaffManTreeNode<W>* _pLeft;
 	HaffManTreeNode<W>* _pRight;
@@ -43,18 +41,21 @@ public:
 
 	//建立haffman树
 
-	void CreadHaffmanTree(const vector<W>& char_info,const W& invalid){
-		if (char_info.empty()){
+	
+
+
+	void CreateHaffmanTree(const vector<W>& v,const W& invalid)
+	{
+		if (v.empty())
 			return;
 			//统计的字符的信息为空
-		}
-		priority_queue<pHFNode, vector<pHFNode>, Less<W>> q;/////////////////////
+		priority_queue<pHFNode, vector<pHFNode>, Less<W>> q;
 		
 		//将char_info中的元素建立小堆----优先级队列建立小堆
-
-		for (size_t i = 0; i < char_info.size(); ++i){
-			if (char_info[i] != invalid){
-				q.push(new HFNode(char_info[i]));
+		size_t i = 0;
+		for (i = 0; i < v.size(); ++i){
+			if (v[i] != invalid){
+				q.push(new HFNode(v[i]));
 			}
 			
 		}
@@ -70,10 +71,17 @@ public:
 			pParent->_pLeft = pLeft;
 			pParent->_pRight = pRight;
 
+			pLeft->_pParent = pParent;
+			pRight->_pParent = pParent;
+
 			//将新的结点插入小堆中
 			q.push(pParent);
 		}
 		_pRoot = q.top();
+	}
+
+	pHFNode Get_pRoot(){
+		return _pRoot;
 	}
 
 private:
@@ -89,4 +97,5 @@ private:
 
 		delete pRoot;
 	}
+
 };
