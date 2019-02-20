@@ -1,4 +1,5 @@
 #include"FileCrompressHaffM.h"
+#include<queue>
 
 template<class W>
 struct HaffManTreeNode{
@@ -9,10 +10,23 @@ public:
 		, _pParent(nullptr)
 		, _weight(weight){}
 
+	
+	typedef HaffManTreeNode<W> HFNode;
+	bool operator>(const HFNode*& temp){
+		return _weight > temp->_weight;
+	}
+
 	HaffManTreeNode<W>* _pLeft;
 	HaffManTreeNode<W>* _pRight;
 	HaffManTreeNode<W>* _pParent;
 	W _weight;
+};
+
+template<class W>
+struct Less{
+	bool operator()(const W& pLeft, const W& pRight){
+		return pLeft > pRight;
+	}
 };
 
 template<class W>
@@ -30,7 +44,14 @@ public:
 
 	//建立haffman树
 
-	void CreadHaffmanTree(const vector<Char_info>& Char_info, W invalid){
+	void CreadHaffmanTree(const vector<Char_info>& char_info, W invalid){
+		//if (Char_info.empty()){
+		//	//统计的字符信息为空
+		//	return;
+		//}
+		
+		priority_queue<pHFNode, vector<pHFNode>, Less<pHFNode>> q;
+		
 
 	}
 
