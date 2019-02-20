@@ -3,6 +3,7 @@
 void TestFunc(){
 	FileCrompress f;
 	f.CompressFile("1.txt");
+	f.UNCompressFile("1.hzp");
 }
 
 

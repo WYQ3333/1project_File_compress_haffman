@@ -6,8 +6,10 @@
 #include<assert.h>
 using namespace std;
 
+typedef unsigned UCH;
+
 struct Char_info{
-	char _ch;			//记录当前字符
+	UCH _ch;			//记录当前字符
 	long long _char_count;		//当前字符出现的次数
 	string _ch_code;			//当前字符的哈夫曼编码
 	Char_info(long long char_count = 0)
@@ -43,8 +45,10 @@ public:
 	void CompressFile(const string& strFilePath);
 
 	void UNCompressFile(const string& strFilePath);
+	void WriteHead(FILE* fOt, const string& strFilePath);
 
 private:
+	void GetLine(FILE* fIn, string& strContent);
 	void GetHaffmanCode(HaffManTreeNode<Char_info>* pRoot);
 	vector<Char_info> _char_info;
 };
